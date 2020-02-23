@@ -1,0 +1,24 @@
+version: "3"
+services:
+  pub:
+    image: postgres
+    tty: true
+    volumes:
+      - "./docker/pub/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    user: postgres
+  sub:
+    image: postgres
+    tty: true
+    volumes:
+      - "./docker/sub/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+    user: postgres
+    depends_on:
+      - pub
+  client:
+    image: postgres
+    entrypoint: bash
+    tty: true
+    depends_on:
+      - pub
+      - sub
+    user: postgres
