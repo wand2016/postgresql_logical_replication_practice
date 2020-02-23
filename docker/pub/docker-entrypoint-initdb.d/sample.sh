@@ -15,6 +15,7 @@ psql <<EOF
 ALTER SYSTEM SET wal_level = 'logical';
 ALTER SYSTEM SET max_replication_slots = 2;
 ALTER SYSTEM SET max_wal_senders = 2;
+ALTER SYSTEM SET synchronous_standby_names = 'mysub'
 EOF
 
 cat postgresql.auto.conf
